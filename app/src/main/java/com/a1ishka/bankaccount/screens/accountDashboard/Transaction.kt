@@ -25,6 +25,13 @@ fun TransactionItem(
     transaction: Transaction,
     modifier: Modifier = Modifier
 ) {
+    val textColor = when (transaction.status) {
+        "Executed" -> Color(82, 171, 91)
+        "Declined" -> Color(245, 103, 94)
+        "In progress" -> Color(241, 191, 55)
+        else -> Color.White
+    }//instead of state to simplify
+
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -43,12 +50,6 @@ fun TransactionItem(
             Text(
                 text = transaction.date
             )
-            val textColor = when (transaction.status) {
-                "Executed" -> Color(82, 171, 91)
-                "Declined" -> Color(245, 103, 94)
-                "In progress" -> Color(241, 191, 55)
-                else -> Color.White
-            }//instead of state to simplify
             Text(
                 text = transaction.status,
                 color = textColor
