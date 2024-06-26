@@ -29,10 +29,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a1ishka.bankaccount.R
 import com.a1ishka.bankaccount.data.accountData
+import com.a1ishka.bankaccount.data.transactionData
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun AccountDashboard() {
+    val recentTransactions = transactionData.take(4)
+
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -66,7 +69,7 @@ fun AccountDashboard() {
             Column {
                 AccountCard(account = accountData[2])
                 RecentTransactionTitle()
-                RecentTransactions()
+                RecentTransactions(recentTransactions)
             }
             FloatingActionButton(
                 modifier = Modifier
