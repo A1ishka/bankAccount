@@ -18,7 +18,7 @@ fun AccountData(
     modifier: Modifier = Modifier
 ) {
     val lastFourDigits = account.cardNumber % 10000
-    val accountCardNumber = "•••• $lastFourDigits"
+    val accountCardNumber = "•••• $lastFourDigits "
     Column(
         modifier = modifier
             .fillMaxWidth(1f)

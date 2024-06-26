@@ -37,7 +37,7 @@ fun RecentTransactionTitle(
             )
             TextButton(
                 colors = ButtonDefaults.textButtonColors(
-                    contentColor = Color(64,156,255)
+                    contentColor = Color(64, 156, 255)
                 ),
                 onClick = { /*TODO*/ }
             ) {
