@@ -17,8 +17,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.a1ishka.bankaccount.R
 import com.a1ishka.bankaccount.data.Account
-import com.a1ishka.bankaccount.screens.accountDashboard.AccountData
-import com.a1ishka.bankaccount.screens.accountDashboard.ShowAccountsButton
 
 
 @Composable
