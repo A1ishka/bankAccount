@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.a1ishka.bankaccount.screens.accountDashboard.AccountDashboard
+import com.a1ishka.bankaccount.screens.allTransactions.AllTransaction
 import com.a1ishka.bankaccount.ui.theme.BankAccountTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +24,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AccountDashboard()
+                    AllTransaction()
+//                    AccountDashboard()
                 }
             }
         }
