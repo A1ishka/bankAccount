@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,6 +25,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -44,7 +45,10 @@ fun AllTransaction() {
             TopAppBar(
                 navigationIcon = {
                     IconButton(onClick = { /*TODO*/ }) {
-                        Icon(Icons.Default.KeyboardArrowLeft, contentDescription = "Back")
+                        Icon(
+                            Icons.AutoMirrored.Filled.KeyboardArrowLeft,
+                            contentDescription = "Back"
+                        )
                     }
                 },
                 title = {
@@ -54,7 +58,7 @@ fun AllTransaction() {
                             .padding(top = 10.dp),
                     ) {
                         Text(
-                            text = "All transactions",
+                            text = stringResource(R.string.all_transactions),
                             modifier = Modifier.align(Alignment.TopCenter),
                             fontSize = 25.sp,
                             fontWeight = FontWeight.SemiBold,
@@ -67,7 +71,10 @@ fun AllTransaction() {
                             containerColor = Color(29, 29, 29, 255)
                         ),
                         onClick = { /*TODO*/ }) {
-                        Image(painter = painterResource(id = R.drawable.im_ellipsis_circle), contentDescription = "Filter Details")
+                        Image(
+                            painter = painterResource(id = R.drawable.im_ellipsis_circle),
+                            contentDescription = "Filter Details"
+                        )
                     }
                 }
             )

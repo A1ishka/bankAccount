@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -69,5 +69,5 @@ fun TransactionItem(
             }
         }
     }
-    Divider(color = Color.Gray, thickness = 1.dp)
+    HorizontalDivider(thickness = 1.dp, color = Color.Gray)
 }
