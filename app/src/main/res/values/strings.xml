@@ -3,4 +3,11 @@
     <string name="account">Account</string>
     <string name="recent_transactions">Recent Transactions</string>
     <string name="view_all">VIEW ALL</string>
+    <string name="transaction">Transaction</string>
+    <string name="transaction_was_applied_in">Transaction was applied in</string>
+    <string name="transaction_number">Transaction number</string>
+    <string name="date">Date</string>
+    <string name="transaction_status">Transaction status</string>
+    <string name="amount">Amount</string>
+    <string name="okay">Okay</string>
 </resources>
