@@ -20,9 +20,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.a1ishka.bankaccount.R
 import com.a1ishka.bankaccount.data.accountData
 
 @Composable
@@ -47,7 +49,7 @@ fun BottomSheet(
                     .padding(top = 10.dp),
             ) {
                 Text(
-                    text = "Select the account",
+                    text = stringResource(R.string.select_the_account),
                     fontSize = 30.sp,
                     fontWeight = FontWeight.SemiBold,
                 )
