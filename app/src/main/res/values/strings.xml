@@ -12,4 +12,11 @@
     <string name="okay">Okay</string>
     <string name="all_transactions">All transactions</string>
     <string name="select_the_account">Select the account</string>
+    <string name="submit">Submit</string>
+    <string name="filter_by_date">Filter By Date</string>
+    <string name="cancel">Cancel</string>
+    <string name="select_start_date">Select start date</string>
+    <string name="select_end_date">Select end date</string>
+    <string name="start_date">Start date</string>
+    <string name="end_date">End date</string>
 </resources>
