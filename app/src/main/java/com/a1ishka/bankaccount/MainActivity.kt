@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
-import com.a1ishka.bankaccount.screens.accountDashboard.AccountDashboard
+import com.a1ishka.bankaccount.screens.allTransactions.AllTransaction
 import com.a1ishka.bankaccount.ui.theme.BankAccountTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AccountDashboard()
+                    AllTransaction()
                 }
             }
         }
