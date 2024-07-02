@@ -10,6 +10,7 @@ import com.a1ishka.bankaccount.screens.accountDashboard.AccountDashboard
 import com.a1ishka.bankaccount.screens.allTransactions.AllTransaction
 import com.a1ishka.bankaccount.screens.newAccountScreen.NewAccountScreen
 import com.a1ishka.bankaccount.screens.newTransaction.NewTransactionScreen
+import com.a1ishka.bankaccount.util.Constants.ARGUMENT_ID
 
 @Composable
 fun NavGraph() {
@@ -28,19 +29,17 @@ fun NavGraph() {
         }
 
         composable(
-            route = Screen.TransactionDetailsScreen.route + "?id=${id}",
+            route = Screen.TransactionDetailsScreen.route + "?${ARGUMENT_ID}=${id}",
             arguments = listOf(
-                navArgument("id") {
+                navArgument(ARGUMENT_ID) {
                     type = NavType.LongType
                 }
             )
-        ) { entry ->
-//            TransactionDetailsScreen(id = entry.arguments?.getLong("id"))
-        }
+        ) { }
 
         composable(route = Screen.TransactionAddingScreen.route) {
             NewTransactionScreen()
         }
-
     }
 }
+
