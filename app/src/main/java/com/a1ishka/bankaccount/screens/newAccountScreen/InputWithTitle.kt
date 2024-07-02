@@ -41,7 +41,7 @@ fun InputWithTitle(
             .fillMaxWidth()
             .padding(top = 10.dp, bottom = 20.dp),
         value = onTextChanged.toString(),
-        onValueChange = { onTextChanged },
+        onValueChange = onTextChanged,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         textStyle = TextStyle(fontSize = 17.sp),
         colors = OutlinedTextFieldDefaults.colors(

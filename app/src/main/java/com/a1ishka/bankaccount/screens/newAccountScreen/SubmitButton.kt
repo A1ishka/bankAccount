@@ -6,7 +6,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -20,18 +19,13 @@ fun SubmitButton(
     accountName: String,
     accountNumber: String,
     accountCardNumber: String,
-    onValidate: (validated: Boolean)->Unit,
-onClick: () -> Unit = {}
+    onValidate: (validated: Boolean) -> Unit,
+    onClick: () -> Unit = {}
 ) {
     Button(
         modifier = Modifier.fillMaxWidth(),
         onClick = {
-            if (validate(
-                    accountName,
-                    accountNumber,
-                    accountCardNumber
-                )
-            ) {
+            if (validate(accountName, accountNumber, accountCardNumber)) {
                 onValidate(true)
                 onClick
             } else {
