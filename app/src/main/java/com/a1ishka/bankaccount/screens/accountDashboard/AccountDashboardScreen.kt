@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.a1ishka.bankaccount.screens.accountDashboard
 
 import android.annotation.SuppressLint
@@ -27,13 +25,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.a1ishka.bankaccount.R
 import com.a1ishka.bankaccount.data.accountData
 import com.a1ishka.bankaccount.data.transactionData
+import com.a1ishka.bankaccount.navigation.Screen
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun AccountDashboard() {
+fun AccountDashboard(
+    navController: NavController
+) {
     val recentTransactions = transactionData.take(4)
 
     Scaffold(
@@ -67,8 +70,17 @@ fun AccountDashboard() {
                 .padding(top = 50.dp)
         ) {
             Column {
-                AccountCard(account = accountData[2])
-                RecentTransactionTitle()
+                AccountCard(
+                    account = accountData[2],
+                    onNavigate = {
+                        navController.navigate(Screen.AccountAddingScreen.route)
+                    }
+                )
+                RecentTransactionTitle(
+                    onNavigate = {
+                        navController.navigate(Screen.AllTransactionScreen.route)
+                    }
+                )
                 RecentTransactions(recentTransactions)
             }
             FloatingActionButton(
@@ -77,7 +89,7 @@ fun AccountDashboard() {
                     .align(Alignment.BottomEnd),
                 containerColor = Color(64, 156, 255),
                 contentColor = Color.White,
-                onClick = { /*TODO*/ },
+                onClick = { navController.navigate(Screen.TransactionAddingScreen.route) },
                 shape = CircleShape
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Add Transaction")

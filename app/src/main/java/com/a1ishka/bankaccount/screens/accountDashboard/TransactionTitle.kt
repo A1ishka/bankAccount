@@ -15,10 +15,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.a1ishka.bankaccount.R
+import com.a1ishka.bankaccount.navigation.Screen
 
 @Composable
 fun RecentTransactionTitle(
+    onNavigate: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -39,7 +42,7 @@ fun RecentTransactionTitle(
                 colors = ButtonDefaults.textButtonColors(
                     contentColor = Color(64, 156, 255)
                 ),
-                onClick = { /*TODO*/ }
+                onClick = onNavigate,
             ) {
                 Text(stringResource(R.string.view_all))
             }
