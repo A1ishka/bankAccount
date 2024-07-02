@@ -70,8 +70,17 @@ fun AccountDashboard(
                 .padding(top = 50.dp)
         ) {
             Column {
-                AccountCard(account = accountData[2], onNavigate = { navController.navigate(Screen.AccountAddingScreen.route) })
-                RecentTransactionTitle(onNavigate = { navController.navigate(Screen.AllTransactionScreen.route) })
+                AccountCard(
+                    account = accountData[2],
+                    onNavigate = {
+                        navController.navigate(Screen.AccountAddingScreen.route)
+                    }
+                )
+                RecentTransactionTitle(
+                    onNavigate = {
+                        navController.navigate(Screen.AllTransactionScreen.route)
+                    }
+                )
                 RecentTransactions(recentTransactions)
             }
             FloatingActionButton(
