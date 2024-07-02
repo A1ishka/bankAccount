@@ -32,7 +32,7 @@ import com.a1ishka.bankaccount.navigation.Screen
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheet(
-    navController: NavController,
+    onNavigate: () -> Unit,
     onDismiss: () -> Unit
 ) {
     val modalBottomSheetState = rememberModalBottomSheetState()
@@ -66,7 +66,7 @@ fun BottomSheet(
                     .align(Alignment.BottomEnd),
                 containerColor = Color(64, 156, 255),
                 contentColor = Color.White,
-                onClick = { navController.navigate(Screen.AccountAddingScreen.route) },
+                onClick = onNavigate,
                 shape = CircleShape
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Add Account")

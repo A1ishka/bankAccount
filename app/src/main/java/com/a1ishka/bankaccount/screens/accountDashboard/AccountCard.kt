@@ -23,7 +23,7 @@ import com.a1ishka.bankaccount.data.Account
 @Composable
 fun AccountCard(
     account: Account,
-    navController: NavController,
+    onNavigate: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -46,7 +46,7 @@ fun AccountCard(
             AccountData(account = account)
             //do i need to associate it together or image is a constant
 
-            ShowAccountsButton(navController = navController)
+            ShowAccountsButton(onNavigate = onNavigate)
         }
     }
 }

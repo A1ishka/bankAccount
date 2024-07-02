@@ -21,7 +21,7 @@ import com.a1ishka.bankaccount.navigation.Screen
 
 @Composable
 fun RecentTransactionTitle(
-    navController: NavController,
+    onNavigate: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -42,7 +42,7 @@ fun RecentTransactionTitle(
                 colors = ButtonDefaults.textButtonColors(
                     contentColor = Color(64, 156, 255)
                 ),
-                onClick = { navController.navigate(Screen.AllTransactionScreen.route) }
+                onClick = onNavigate,
             ) {
                 Text(stringResource(R.string.view_all))
             }

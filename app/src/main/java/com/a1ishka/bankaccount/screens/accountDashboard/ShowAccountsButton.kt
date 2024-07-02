@@ -18,13 +18,13 @@ import com.a1ishka.bankaccount.screens.accountDashboard.accountChoosingBottomShe
 
 @Composable
 fun ShowAccountsButton(
-    navController: NavController,
+    onNavigate: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var showAccountBottomSheet by remember { mutableStateOf(false) }
 
     if (showAccountBottomSheet) {
-        BottomSheet(navController = navController) {
+        BottomSheet(onNavigate = onNavigate) {
             showAccountBottomSheet = false
         }
     }
