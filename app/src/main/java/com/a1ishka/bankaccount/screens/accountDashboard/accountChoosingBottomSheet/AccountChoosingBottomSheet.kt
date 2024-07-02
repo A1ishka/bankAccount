@@ -24,11 +24,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.a1ishka.bankaccount.R
 import com.a1ishka.bankaccount.data.accountData
+import com.a1ishka.bankaccount.navigation.Screen
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheet(
+    navController: NavController,
     onDismiss: () -> Unit
 ) {
     val modalBottomSheetState = rememberModalBottomSheetState()
@@ -62,7 +66,7 @@ fun BottomSheet(
                     .align(Alignment.BottomEnd),
                 containerColor = Color(64, 156, 255),
                 contentColor = Color.White,
-                onClick = { /*TODO*/ },
+                onClick = { navController.navigate(Screen.AccountAddingScreen.route) },
                 shape = CircleShape
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Add Account")
