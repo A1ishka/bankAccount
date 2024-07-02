@@ -25,7 +25,7 @@ fun NavGraph() {
         }
 
         composable(route = Screen.AllTransactionScreen.route) {
-            AllTransaction()
+            AllTransaction(navController = navController)
         }
 
         composable(

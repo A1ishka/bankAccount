@@ -24,13 +24,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.a1ishka.bankaccount.R
 import com.a1ishka.bankaccount.data.transactionData
 import com.a1ishka.bankaccount.screens.accountDashboard.RecentTransactions
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun AllTransaction() {
+fun AllTransaction(
+    navController: NavController
+) {
     Scaffold(
         modifier = Modifier
             .fillMaxSize()
@@ -39,7 +42,11 @@ fun AllTransaction() {
         topBar = {
             TopAppBar(
                 navigationIcon = {
-                    IconButton(onClick = { /*TODO*/ }) {
+                    IconButton(
+                        onClick = {
+                            navController.popBackStack()
+                        }
+                    ) {
                         Icon(
                             Icons.AutoMirrored.Filled.KeyboardArrowLeft,
                             contentDescription = "Back"
