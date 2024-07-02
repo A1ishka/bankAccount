@@ -17,25 +17,25 @@ import com.a1ishka.bankaccount.R
 
 @Composable
 fun SubmitButton(
-    accountName: MutableState<String>,
-    accountNumber: MutableState<String>,
-    accountCardNumber: MutableState<String>,
-    validated: MutableState<Boolean>,
-    onClick: () -> Unit = {}
+    accountName: String,
+    accountNumber: String,
+    accountCardNumber: String,
+    onValidate: (validated: Boolean)->Unit,
+onClick: () -> Unit = {}
 ) {
     Button(
         modifier = Modifier.fillMaxWidth(),
         onClick = {
             if (validate(
-                    accountName.value,
-                    accountNumber.value,
-                    accountCardNumber.value
+                    accountName,
+                    accountNumber,
+                    accountCardNumber
                 )
             ) {
-                validated.value = true
+                onValidate(true)
                 onClick
             } else {
-                validated.value = false
+                onValidate(false)
             }
             //be replaced to VM
         },

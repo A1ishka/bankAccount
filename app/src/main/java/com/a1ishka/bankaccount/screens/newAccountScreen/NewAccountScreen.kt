@@ -53,24 +53,24 @@ fun NewAccountScreen() {
             )
             InputWithTitle(
                 titleId = R.string.account_name,
-                currentInput = accountName,
+                { accountName.value = it },
                 keyboardType = KeyboardType.Text,
                 validated = validated.value
             )
             InputWithTitle(
                 titleId = R.string.account_number,
-                currentInput = accountNumber,
+                { accountNumber.value = it },
                 keyboardType = KeyboardType.Number,
                 validated = validated.value
             )
             InputWithTitle(
                 titleId = R.string.card_number,
-                currentInput = accountCardNumber,
+                { accountCardNumber.value = it },
                 keyboardType = KeyboardType.Number,
                 validated = validated.value
             )
 
-            SubmitButton(accountName, accountNumber, accountCardNumber, validated)
+            SubmitButton(accountName.value, accountNumber.value, accountCardNumber.value, {validated.value = it})
         }
     }
 }

@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun InputWithTitle(
     @StringRes titleId: Int,
-    currentInput: MutableState<String>,
+    onTextChanged: (currentInput:String) -> Unit,
     keyboardType: KeyboardType,
     validated: Boolean
 ) {
@@ -40,8 +40,8 @@ fun InputWithTitle(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 10.dp, bottom = 20.dp),
-        value = currentInput.value,
-        onValueChange = { currentInput.value = it },
+        value = onTextChanged.toString(),
+        onValueChange = { onTextChanged },
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         textStyle = TextStyle(fontSize = 17.sp),
         colors = OutlinedTextFieldDefaults.colors(
