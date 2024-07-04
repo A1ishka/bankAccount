@@ -3,14 +3,15 @@ package com.a1ishka.bankaccount.presentation.account
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.a1ishka.bankaccount.data.entity.AccountEntity
-import com.a1ishka.bankaccount.domain.AccountDao
+import com.a1ishka.bankaccount.data.repository.AccountRepositoryImpl
+import com.a1ishka.bankaccount.util.toAccountEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class AccountViewModel @Inject constructor(
-    private val accountDao: AccountDao
+    private val accountRepositoryImpl: AccountRepositoryImpl
 ) : ViewModel() {
     private val _state = MutableStateFlow(AccountState())
     val accountState: MutableStateFlow<AccountState> = _state
@@ -34,13 +35,13 @@ class AccountViewModel @Inject constructor(
                     accountNumber = accountNumber
                 )
                 viewModelScope.launch {
-                    accountDao.upsertAccount(account)
+                    accountRepositoryImpl.upsertAccount(account)
                 }
             }
 
             is AccountEvent.DeleteAccount -> {
                 viewModelScope.launch {
-                    accountDao.deleteAccount(event.account)
+                    accountRepositoryImpl.deleteAccount(event.account.toAccountEntity())
                 }
             }
 

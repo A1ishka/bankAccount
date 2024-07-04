@@ -3,7 +3,8 @@ package com.a1ishka.bankaccount.presentation.transaction
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.a1ishka.bankaccount.data.entity.TransactionEntity
-import com.a1ishka.bankaccount.domain.TransactionDao
+import com.a1ishka.bankaccount.data.repository.TransactionRepositoryImpl
+import com.a1ishka.bankaccount.util.toTransactionEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -11,7 +12,7 @@ import javax.inject.Inject
 
 
 class TransactionViewModel @Inject constructor(
-    private val transactionDao: TransactionDao
+    private val transactionRepositoryImpl: TransactionRepositoryImpl
 ) : ViewModel() {
     private val _state = MutableStateFlow(TransactionState())
     val transactionState: MutableStateFlow<TransactionState> = _state
@@ -41,19 +42,19 @@ class TransactionViewModel @Inject constructor(
                     amount = amount
                 )
                 viewModelScope.launch {
-                    transactionDao.upsertTransaction(transaction)
+                    transactionRepositoryImpl.upsertTransaction(transaction)
                 }
             }
 
             is TransactionEvent.DeleteTransaction -> {
                 viewModelScope.launch {
-                    transactionDao.deleteTransaction(event.transaction)
+                    transactionRepositoryImpl.deleteTransaction(event.transaction.toTransactionEntity())
                 }
             }
 
             is TransactionEvent.FilterTransactions -> {
                 viewModelScope.launch {
-                    transactionDao.getFilteredTransactions(
+                    transactionRepositoryImpl.getFilteredTransactions(
                         event.accountId,
                         event.startDate,
                         event.endDate
