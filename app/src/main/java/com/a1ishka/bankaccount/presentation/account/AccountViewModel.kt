@@ -2,8 +2,8 @@ package com.a1ishka.bankaccount.presentation.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.a1ishka.bankaccount.data.entity.AccountEntity
 import com.a1ishka.bankaccount.data.repository.AccountRepositoryImpl
+import com.a1ishka.bankaccount.domain.Account
 import com.a1ishka.bankaccount.util.toAccountEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -19,6 +19,7 @@ class AccountViewModel @Inject constructor(
     fun onAccountEvent(event: AccountEvent) {
         when (event) {
             is AccountEvent.SaveAccount -> {
+                val accountId = _state.value.currentAccount?.accountId
                 val name = _state.value.name
                 val cardNumber = _state.value.cardNumber
                 val accountNumber = _state.value.accountNumber
@@ -29,13 +30,14 @@ class AccountViewModel @Inject constructor(
                 }
 
                 _state.update { it.copy(isAccountVerified = true) }
-                val account = AccountEntity(
+                val account = Account(
+                    accountId = accountId,
                     name = name,
                     cardNumber = cardNumber,
                     accountNumber = accountNumber
                 )
                 viewModelScope.launch {
-                    accountRepositoryImpl.upsertAccount(account)
+                    accountRepositoryImpl.upsertAccount(account.toAccountEntity())
                 }
             }
 

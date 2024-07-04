@@ -1,4 +1,4 @@
-package com.a1ishka.bankaccount.presentation.navigation
+package com.a1ishka.bankaccount.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel

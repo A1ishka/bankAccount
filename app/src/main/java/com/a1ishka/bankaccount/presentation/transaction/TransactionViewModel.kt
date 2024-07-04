@@ -2,8 +2,8 @@ package com.a1ishka.bankaccount.presentation.transaction
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.a1ishka.bankaccount.data.entity.TransactionEntity
 import com.a1ishka.bankaccount.data.repository.TransactionRepositoryImpl
+import com.a1ishka.bankaccount.domain.Transaction
 import com.a1ishka.bankaccount.util.toTransactionEntity
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
@@ -33,7 +33,7 @@ class TransactionViewModel @Inject constructor(
                 }
 
                 _state.update { it.copy(isTransactionVerified = true) }
-                val transaction = TransactionEntity(
+                val transaction = Transaction(
                     accountId = accountId,
                     applier = applier,
                     number = number,
@@ -42,7 +42,7 @@ class TransactionViewModel @Inject constructor(
                     amount = amount
                 )
                 viewModelScope.launch {
-                    transactionRepositoryImpl.upsertTransaction(transaction)
+                    transactionRepositoryImpl.upsertTransaction(transaction.toTransactionEntity())
                 }
             }
 

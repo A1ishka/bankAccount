@@ -1,4 +1,4 @@
-package com.a1ishka.bankaccount.presentation.navigation
+package com.a1ishka.bankaccount.navigation
 
 sealed class Screen(val route: String) {
     object AccountDashboardScreen : Screen(route = "account_dashboard_screen")

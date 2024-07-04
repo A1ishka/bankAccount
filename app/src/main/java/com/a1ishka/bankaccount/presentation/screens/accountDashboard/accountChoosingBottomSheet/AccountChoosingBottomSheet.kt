@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.a1ishka.bankaccount.R
 import com.a1ishka.bankaccount.data.accountData
-import com.a1ishka.bankaccount.presentation.navigation.Screen
+import com.a1ishka.bankaccount.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
