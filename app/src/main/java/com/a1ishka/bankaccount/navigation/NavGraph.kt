@@ -1,15 +1,18 @@
 package com.a1ishka.bankaccount.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.a1ishka.bankaccount.screens.accountDashboard.AccountDashboard
-import com.a1ishka.bankaccount.screens.allTransactions.AllTransaction
-import com.a1ishka.bankaccount.screens.newAccountScreen.NewAccountScreen
-import com.a1ishka.bankaccount.screens.newTransaction.NewTransactionScreen
+import com.a1ishka.bankaccount.presentation.account.AccountViewModel
+import com.a1ishka.bankaccount.presentation.screens.accountDashboard.AccountDashboard
+import com.a1ishka.bankaccount.presentation.screens.allTransactions.AllTransaction
+import com.a1ishka.bankaccount.presentation.screens.newAccountScreen.NewAccountScreen
+import com.a1ishka.bankaccount.presentation.screens.newTransaction.NewTransactionScreen
+import com.a1ishka.bankaccount.presentation.transaction.TransactionViewModel
 import com.a1ishka.bankaccount.util.Constants.ARGUMENT_ID
 
 @Composable
