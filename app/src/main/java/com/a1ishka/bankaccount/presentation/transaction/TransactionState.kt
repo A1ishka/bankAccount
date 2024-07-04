@@ -1,9 +1,9 @@
 package com.a1ishka.bankaccount.presentation.transaction
 
-import com.a1ishka.bankaccount.data.entity.TransactionEntity
+import com.a1ishka.bankaccount.domain.Transaction
 
 data class TransactionState(
-    val transactionList: List<TransactionEntity> = emptyList(),
+    val transactionList: List<Transaction> = emptyList(),
     val applier: String = "",
     val number: String = "",
     val date: String = "",

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.a1ishka.bankaccount.R
-import com.a1ishka.bankaccount.presentation.navigation.Screen
+import com.a1ishka.bankaccount.navigation.Screen
 
 @Composable
 fun RecentTransactionTitle(
