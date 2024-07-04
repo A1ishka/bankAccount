@@ -1,6 +1,6 @@
 package com.a1ishka.bankaccount.data.repository
 
-import com.a1ishka.bankaccount.data.AccountDao
+import com.a1ishka.bankaccount.data.dao.AccountDao
 import com.a1ishka.bankaccount.data.entity.AccountEntity
 import com.a1ishka.bankaccount.domain.repository.AccountRepository
 import kotlinx.coroutines.flow.Flow

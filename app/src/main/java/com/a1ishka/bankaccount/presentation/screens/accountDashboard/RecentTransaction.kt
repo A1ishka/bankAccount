@@ -11,8 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.a1ishka.bankaccount.data.Transaction
-import com.a1ishka.bankaccount.data.transactionData
+import com.a1ishka.bankaccount.data.local_data.Transaction
 
 @Composable
 fun RecentTransactions(

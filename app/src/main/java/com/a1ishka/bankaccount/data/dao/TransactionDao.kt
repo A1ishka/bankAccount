@@ -1,4 +1,4 @@
-package com.a1ishka.bankaccount.data
+package com.a1ishka.bankaccount.data.dao
 
 import androidx.room.Dao
 import androidx.room.Delete

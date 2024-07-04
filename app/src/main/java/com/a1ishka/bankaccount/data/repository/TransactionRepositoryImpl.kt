@@ -1,6 +1,6 @@
 package com.a1ishka.bankaccount.data.repository
 
-import com.a1ishka.bankaccount.data.TransactionDao
+import com.a1ishka.bankaccount.data.dao.TransactionDao
 import com.a1ishka.bankaccount.data.entity.TransactionEntity
 import com.a1ishka.bankaccount.domain.repository.TransactionRepository
 import kotlinx.coroutines.Dispatchers

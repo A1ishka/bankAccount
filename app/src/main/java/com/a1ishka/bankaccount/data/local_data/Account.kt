@@ -1,4 +1,4 @@
-package com.a1ishka.bankaccount.data
+package com.a1ishka.bankaccount.data.local_data
 
 data class Account(
     val accountId: Long,

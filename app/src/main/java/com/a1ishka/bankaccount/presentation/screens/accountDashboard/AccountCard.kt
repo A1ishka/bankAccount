@@ -15,9 +15,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.a1ishka.bankaccount.R
-import com.a1ishka.bankaccount.data.Account
+import com.a1ishka.bankaccount.data.local_data.Account
 
 
 @Composable

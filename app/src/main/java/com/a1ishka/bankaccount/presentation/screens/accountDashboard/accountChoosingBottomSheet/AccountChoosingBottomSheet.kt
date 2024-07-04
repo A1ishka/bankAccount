@@ -24,10 +24,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.a1ishka.bankaccount.R
-import com.a1ishka.bankaccount.data.accountData
-import com.a1ishka.bankaccount.navigation.Screen
+import com.a1ishka.bankaccount.data.local_data.accountData
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

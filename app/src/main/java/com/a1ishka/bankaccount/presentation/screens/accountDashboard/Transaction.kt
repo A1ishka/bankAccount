@@ -17,7 +17,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a1ishka.bankaccount.R
-import com.a1ishka.bankaccount.data.Transaction
+import com.a1ishka.bankaccount.data.local_data.Transaction
 
 
 @Composable
