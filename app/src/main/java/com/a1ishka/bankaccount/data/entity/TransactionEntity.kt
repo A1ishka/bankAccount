@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class TransactionEntity(
     @PrimaryKey(autoGenerate = true)
-    val transactionId: Long? = 0,
+    val transactionId: Long,
     val accountId: Long,
     val applier: String,
     val number: String,

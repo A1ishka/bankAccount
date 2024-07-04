@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity
 data class AccountEntity(
     @PrimaryKey(autoGenerate = true)
-    val accountId: Long? = 0,
+    val accountId: Long,
     val name: String,
     val accountNumber: Long,
     val cardNumber: Long
