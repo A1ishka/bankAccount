@@ -4,18 +4,29 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.a1ishka.bankaccount.data.repository.TransactionRepositoryImpl
 import com.a1ishka.bankaccount.domain.Transaction
+import com.a1ishka.bankaccount.domain.repository.TransactionRepository
 import com.a1ishka.bankaccount.util.toTransactionEntity
+import com.a1ishka.bankaccount.util.toTransactionList
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
+@HiltViewModel
 class TransactionViewModel @Inject constructor(
-    private val transactionRepositoryImpl: TransactionRepositoryImpl
+    private val transactionRepository: TransactionRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(TransactionState())
     val transactionState: MutableStateFlow<TransactionState> = _state
+
+    init {
+        viewModelScope.launch {
+            transactionRepository.getTransactions(accountId = _state.value.accountId).collect { transactions ->
+                _state.update { it.copy(transactionList = transactions.toTransactionList()) }
+            }
+        }
+    }
 
     fun onTransactionEvent(event: TransactionEvent) {
         when (event) {
@@ -42,19 +53,19 @@ class TransactionViewModel @Inject constructor(
                     amount = amount
                 )
                 viewModelScope.launch {
-                    transactionRepositoryImpl.upsertTransaction(transaction.toTransactionEntity())
+                    transactionRepository.upsertTransaction(transaction.toTransactionEntity())
                 }
             }
 
             is TransactionEvent.DeleteTransaction -> {
                 viewModelScope.launch {
-                    transactionRepositoryImpl.deleteTransaction(event.transaction.toTransactionEntity())
+                    transactionRepository.deleteTransaction(event.transaction.toTransactionEntity())
                 }
             }
 
             is TransactionEvent.FilterTransactions -> {
                 viewModelScope.launch {
-                    transactionRepositoryImpl.getFilteredTransactions(
+                    transactionRepository.getFilteredTransactions(
                         event.accountId,
                         event.startDate,
                         event.endDate

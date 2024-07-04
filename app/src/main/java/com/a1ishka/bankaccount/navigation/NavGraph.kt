@@ -16,11 +16,16 @@ import com.a1ishka.bankaccount.presentation.transaction.TransactionViewModel
 import com.a1ishka.bankaccount.util.Constants.ARGUMENT_ID
 
 @Composable
-fun NavGraph() {
+fun NavGraph(
+    accountViewModel: AccountViewModel = hiltViewModel(),
+    transactionViewModel: TransactionViewModel = hiltViewModel()
+) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.AccountDashboardScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.AllTransactionScreen.route) {
         composable(route = Screen.AccountDashboardScreen.route) {
-            AccountDashboard(navController = navController)
+            AccountDashboard(
+                navController = navController
+            )
         }
 
         composable(route = Screen.AccountAddingScreen.route) {
