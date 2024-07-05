@@ -91,7 +91,7 @@ fun NewAccountScreen(accountViewModel: AccountViewModel) {
                 validated = accountState.isAccountVerified
             )
 
-            SubmitButton()
+            SubmitButton { accountViewModel.onAccountEvent(AccountEvent.SaveAccount) }
         }
     }
 }

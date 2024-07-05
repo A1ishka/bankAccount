@@ -7,9 +7,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Button
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -23,21 +26,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.a1ishka.bankaccount.R
-import com.a1ishka.bankaccount.data.local_data.accountData
-import com.a1ishka.bankaccount.data.local_data.transactionData
 import com.a1ishka.bankaccount.navigation.Screen
+import com.a1ishka.bankaccount.presentation.account.AccountViewModel
+import com.a1ishka.bankaccount.presentation.transaction.TransactionViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun AccountDashboard(
-    navController: NavController
+    navController: NavController,
+    accountViewModel: AccountViewModel,
+    transactionViewModel: TransactionViewModel
 ) {
-    val recentTransactions = transactionData.take(4)
+    val accountState = accountViewModel.accountState.value
+    val transactionState = transactionViewModel.transactionState.value
+    val recentTransactions = transactionState.transactionList.take(4)
 
     Scaffold(
         modifier = Modifier
@@ -70,8 +78,40 @@ fun AccountDashboard(
                 .padding(top = 50.dp)
         ) {
             Column {
+                if (accountState.isLoading) {
+                    CircularProgressIndicator(
+                        color = MaterialTheme.colorScheme.secondary,
+                        trackColor = MaterialTheme.colorScheme.surfaceVariant,
+                    )
+                }
+                if (accountState.accountList.isEmpty()) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(horizontal = 30.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = stringResource(R.string.no_account_found),
+                            style = MaterialTheme.typography.displayMedium,
+                            textAlign = TextAlign.Center
+                        )
+                        Button(
+                            onClick = {
+                                navController.navigate(Screen.AccountAddingScreen.route)
+                            }
+                        ){
+                            Text(
+                                text = stringResource(R.string.add_an_account),
+                                style = MaterialTheme.typography.displayMedium,
+                                textAlign = TextAlign.Center
+                            )
+                        }
+                    }
+                }
                 AccountCard(
-                    account = accountData[2],
+                    account = accountViewModel.accountState.value.currentAccount!!,
+                    accountList = accountViewModel.accountState.value.accountList,
                     onNavigate = {
                         navController.navigate(Screen.AccountAddingScreen.route)
                     }
@@ -81,7 +121,7 @@ fun AccountDashboard(
                         navController.navigate(Screen.AllTransactionScreen.route)
                     }
                 )
-                RecentTransactions(recentTransactions)
+                RecentTransactions(transactions = recentTransactions, navController = navController)
             }
             FloatingActionButton(
                 modifier = Modifier

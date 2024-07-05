@@ -2,14 +2,19 @@ package com.a1ishka.bankaccount.presentation.account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.a1ishka.bankaccount.data.entity.AccountEntity
 import com.a1ishka.bankaccount.domain.Account
 import com.a1ishka.bankaccount.domain.repository.AccountRepository
+import com.a1ishka.bankaccount.util.Resource
 import com.a1ishka.bankaccount.util.toAccount
 import com.a1ishka.bankaccount.util.toAccountEntity
 import com.a1ishka.bankaccount.util.toAccountList
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,13 +26,35 @@ class AccountViewModel @Inject constructor(
     private val _state = MutableStateFlow(AccountState())
     val accountState: StateFlow<AccountState> = _state
 
+    private var getAccountsJob: Job? = null
+
     init {
-        viewModelScope.launch {
-            accountRepository.getAccounts().collect { accounts ->
-                _state.update { it.copy(accountList = accounts.toAccountList()) }
+        getAccounts()
+    }
+
+    fun getAccounts() {
+        getAccountsJob?.cancel()
+        getAccountsJob = accountRepository.getAccounts().onEach { result ->
+            when (result) {
+                is Resource.Success<*> -> {
+                    if (result.data != null) {
+                        _state.value = accountState.value.copy(
+                            accountList = (result.data as List<AccountEntity>).toAccountList(),
+                            currentAccount = result.data[0].toAccount(),
+                            isLoading = false
+                        )
+                    }
+                }
+
+                is Resource.Error<*> -> {
+                    println(result.message)
+                }
+
+                is Resource.Loading<*> -> {
+                    _state.value = accountState.value.copy(isLoading = true)
+                }
             }
-            _state.update { it.copy(currentAccount = accountRepository.getAccount(0).toAccount()) }
-        }
+        }.launchIn(viewModelScope)
     }
 
     fun onAccountEvent(event: AccountEvent) {
