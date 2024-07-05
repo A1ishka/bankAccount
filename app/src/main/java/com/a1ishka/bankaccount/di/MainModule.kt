@@ -11,6 +11,7 @@ import com.a1ishka.bankaccount.domain.repository.AccountRepository
 import com.a1ishka.bankaccount.domain.repository.TransactionRepository
 import com.a1ishka.bankaccount.presentation.account.AccountViewModel
 import com.a1ishka.bankaccount.presentation.transaction.TransactionViewModel
+import com.a1ishka.bankaccount.presentation.transaction.transactionDetails.TransactionDetailsViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -64,6 +65,14 @@ object MainModule {
         transactionRepository: TransactionRepository
     ): TransactionViewModel {
         return TransactionViewModel(transactionRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideTransactionDetailsViewModel(
+        transactionRepository: TransactionRepository
+    ): TransactionDetailsViewModel {
+        return TransactionDetailsViewModel(transactionRepository)
     }
 
     @Provides

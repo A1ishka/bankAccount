@@ -22,4 +22,7 @@
     <string name="account_name">Account Name</string>
     <string name="account_number">Account Number</string>
     <string name="card_number">Card Number</string>
+    <string name="no_transaction_found">No transaction found</string>
+    <string name="no_account_found">No Account found</string>
+    <string name="add_an_account">Add an account</string>
 </resources>
