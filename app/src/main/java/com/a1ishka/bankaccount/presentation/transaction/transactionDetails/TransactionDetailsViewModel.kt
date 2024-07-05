@@ -31,29 +31,29 @@ class TransactionDetailsViewModel @Inject constructor(
         getTransactionsJob =
             transactionRepository.getTransaction(transactionId = _transaction.value.transactionId)
                 .onEach { result ->
-                    when (result) {
-                        is Resource.Success<*> -> {
-                            if (result.data != null) {
-                                _transaction.value = transactionState.value.copy(
-                                    applier = transactionState.value.applier,
-                                    number = transactionState.value.number,
-                                    date = transactionState.value.date,
-                                    status = transactionState.value.status,
-                                    amount = transactionState.value.amount,
-                                    accountId = transactionState.value.accountId,
-                                    isLoading = false
-                                )
-                            }
-                        }
-
-                        is Resource.Error<*> -> {
-                            println(result.message)
-                        }
-
-                        is Resource.Loading<*> -> {
-                            _transaction.value = transactionState.value.copy(isLoading = true)
-                        }
-                    }
+//                    when (result) {
+//                        is Resource.Success<*> -> {
+//                            if (result.data != null) {
+//                                _transaction.value = transactionState.value.copy(
+//                                    applier = transactionState.value.applier,
+//                                    number = transactionState.value.number,
+//                                    date = transactionState.value.date,
+//                                    status = transactionState.value.status,
+//                                    amount = transactionState.value.amount,
+//                                    accountId = transactionState.value.accountId,
+//                                    isLoading = false
+//                                )
+//                            }
+//                        }
+//
+//                        is Resource.Error<*> -> {
+//                            println(result.message)
+//                        }
+//
+//                        is Resource.Loading<*> -> {
+//                            _transaction.value = transactionState.value.copy(isLoading = true)
+//                        }
+//                    }
                 }.launchIn(viewModelScope)
     }
 }

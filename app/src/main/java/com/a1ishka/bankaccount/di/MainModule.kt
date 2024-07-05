@@ -67,13 +67,13 @@ object MainModule {
         return TransactionViewModel(transactionRepository)
     }
 
-    @Provides
-    @Singleton
-    fun provideTransactionDetailsViewModel(
-        transactionRepository: TransactionRepository
-    ): TransactionDetailsViewModel {
-        return TransactionDetailsViewModel(transactionRepository)
-    }
+//    @Provides
+//    @Singleton
+//    fun provideTransactionDetailsViewModel(
+//        transactionRepository: TransactionRepository
+//    ): TransactionDetailsViewModel {
+//        return TransactionDetailsViewModel(transactionRepository)
+//    }
 
     @Provides
     @Singleton

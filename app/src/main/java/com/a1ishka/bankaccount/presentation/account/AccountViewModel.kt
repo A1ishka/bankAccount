@@ -60,7 +60,7 @@ class AccountViewModel @Inject constructor(
     fun onAccountEvent(event: AccountEvent) {
         when (event) {
             is AccountEvent.SaveAccount -> {
-                val accountId = _state.value.currentAccount?.accountId
+                val accountId = _state.value.currentAccount?.accountId ?: 0
                 val name = _state.value.name
                 val cardNumber = _state.value.cardNumber
                 val accountNumber = _state.value.accountNumber

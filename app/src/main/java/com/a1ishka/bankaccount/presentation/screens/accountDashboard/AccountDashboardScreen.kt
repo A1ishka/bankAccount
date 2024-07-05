@@ -91,31 +91,35 @@ fun AccountDashboard(
                             .padding(horizontal = 30.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        Text(
-                            text = stringResource(R.string.no_account_found),
-                            style = MaterialTheme.typography.displayMedium,
-                            textAlign = TextAlign.Center
-                        )
-                        Button(
-                            onClick = {
-                                navController.navigate(Screen.AccountAddingScreen.route)
-                            }
-                        ){
+                        Column {
                             Text(
-                                text = stringResource(R.string.add_an_account),
-                                style = MaterialTheme.typography.displayMedium,
+                                text = stringResource(R.string.no_account_found),
+                                style = MaterialTheme.typography.displaySmall,
                                 textAlign = TextAlign.Center
                             )
+                            Button(
+                                onClick = {
+                                    navController.navigate(Screen.AccountAddingScreen.route)
+                                }
+                            ){
+                                Text(
+                                    text = stringResource(R.string.add_an_account),
+                                    style = MaterialTheme.typography.displaySmall,
+                                    textAlign = TextAlign.Center
+                                )
+                            }
                         }
                     }
                 }
-                AccountCard(
-                    account = accountViewModel.accountState.value.currentAccount!!,
-                    accountList = accountViewModel.accountState.value.accountList,
-                    onNavigate = {
-                        navController.navigate(Screen.AccountAddingScreen.route)
-                    }
-                )
+                accountState.currentAccount?.let { it1 ->
+                    AccountCard(
+                        account = it1,
+                        accountList = accountState.accountList,
+                        onNavigate = {
+                            navController.navigate(Screen.AccountAddingScreen.route)
+                        }
+                    )
+                }
                 RecentTransactionTitle(
                     onNavigate = {
                         navController.navigate(Screen.AllTransactionScreen.route)
