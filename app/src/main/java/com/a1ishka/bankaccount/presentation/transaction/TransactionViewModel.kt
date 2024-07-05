@@ -2,13 +2,13 @@ package com.a1ishka.bankaccount.presentation.transaction
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.a1ishka.bankaccount.data.repository.TransactionRepositoryImpl
 import com.a1ishka.bankaccount.domain.Transaction
 import com.a1ishka.bankaccount.domain.repository.TransactionRepository
 import com.a1ishka.bankaccount.util.toTransactionEntity
 import com.a1ishka.bankaccount.util.toTransactionList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,13 +18,14 @@ class TransactionViewModel @Inject constructor(
     private val transactionRepository: TransactionRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(TransactionState())
-    val transactionState: MutableStateFlow<TransactionState> = _state
+    val transactionState: StateFlow<TransactionState> = _state
 
     init {
         viewModelScope.launch {
-            transactionRepository.getTransactions(accountId = _state.value.accountId).collect { transactions ->
-                _state.update { it.copy(transactionList = transactions.toTransactionList()) }
-            }
+            transactionRepository.getTransactions(accountId = _state.value.accountId)
+                .collect { transactions ->
+                    _state.update { it.copy(transactionList = transactions.toTransactionList()) }
+                }
         }
     }
 
