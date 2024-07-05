@@ -11,11 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.a1ishka.bankaccount.data.local_data.Transaction
+import androidx.navigation.NavController
+import com.a1ishka.bankaccount.domain.Transaction
+import com.a1ishka.bankaccount.navigation.Screen
 
 @Composable
 fun RecentTransactions(
-    transactions:  List<Transaction>,
+    transactions: List<Transaction>,
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {    
     Box(
@@ -28,7 +31,7 @@ fun RecentTransactions(
             modifier = modifier,
         ) {
             items(transactions) { item ->
-                TransactionItem(transaction = item)
+                TransactionItem(transaction = item, onClick = { navController.navigate(Screen.TransactionDetailsScreen.withArgs(item.transactionId.toString()))})
             }
         }
     }

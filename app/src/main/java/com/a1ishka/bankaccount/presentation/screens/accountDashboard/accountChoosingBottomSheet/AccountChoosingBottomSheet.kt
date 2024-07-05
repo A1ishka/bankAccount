@@ -25,11 +25,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a1ishka.bankaccount.R
-import com.a1ishka.bankaccount.data.local_data.accountData
+import com.a1ishka.bankaccount.domain.Account
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BottomSheet(
+    accountList: List<Account>,
     onNavigate: () -> Unit,
     onDismiss: () -> Unit
 ) {
@@ -55,7 +56,7 @@ fun BottomSheet(
                     fontSize = 30.sp,
                     fontWeight = FontWeight.SemiBold,
                 )
-                AccountList(accountData)
+                AccountList(accountList)
             }
 
             FloatingActionButton(

@@ -13,7 +13,7 @@ class TransactionRepositoryImpl(private val transactionDao: TransactionDao) :
     override fun getTransactions(accountId: Long): Flow<List<TransactionEntity>> =
         transactionDao.getTransactions(accountId)
 
-    override fun getTransaction(transactionId: Long): TransactionEntity =
+    override fun getTransaction(transactionId: Long): Flow<TransactionEntity> =
         transactionDao.getTransaction(transactionId)
 
     override fun getFilteredTransactions(

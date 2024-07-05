@@ -12,11 +12,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a1ishka.bankaccount.R
+import com.a1ishka.bankaccount.presentation.account.AccountEvent
 
 
 @Composable
 fun SubmitButton(
-    onClick: () -> Unit = {}
+    onClick: () -> Unit
 ) {
     Button(
         modifier = Modifier.fillMaxWidth(),

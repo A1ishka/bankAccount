@@ -13,7 +13,7 @@ interface TransactionDao {
     fun getTransactions(accountId: Long): Flow<List<TransactionEntity>>
 
     @Query("SELECT * FROM TransactionEntity WHERE transactionId = :transactionId")
-    fun getTransaction(transactionId: Long): TransactionEntity
+    fun getTransaction(transactionId: Long): Flow<TransactionEntity>
 
     @Query("SELECT * FROM TransactionEntity WHERE accountId = :accountId AND date BETWEEN :startDate AND :endDate")
     fun getFilteredTransactions(

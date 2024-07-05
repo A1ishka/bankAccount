@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface TransactionRepository {
     fun getTransactions(accountId: Long): Flow<List<TransactionEntity>>
-    fun getTransaction(transactionId: Long): TransactionEntity
+    fun getTransaction(transactionId: Long): Flow<TransactionEntity>
     fun getFilteredTransactions(
         accountId: Long,
         startDate: String,
