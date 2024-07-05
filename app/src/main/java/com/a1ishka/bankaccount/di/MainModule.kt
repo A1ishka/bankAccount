@@ -58,19 +58,19 @@ object MainModule {
         return AccountRepositoryImpl(accountDao)
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideViewModel(
-//        transactionRepository: TransactionRepository
-//    ): TransactionViewModel {
-//        return TransactionViewModel(transactionRepository)
-//    }
-//
-//    @Provides
-//    @Singleton
-//    fun provideAccountViewModel(
-//        accountRepository: AccountRepository
-//    ): AccountViewModel {
-//        return AccountViewModel(accountRepository)
-//    }
+    @Provides
+    @Singleton
+    fun provideTransactionViewModel(
+        transactionRepository: TransactionRepository
+    ): TransactionViewModel {
+        return TransactionViewModel(transactionRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAccountViewModel(
+        accountRepository: AccountRepository
+    ): AccountViewModel {
+        return AccountViewModel(accountRepository)
+    }
 }

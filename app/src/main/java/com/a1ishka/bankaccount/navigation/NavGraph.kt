@@ -21,7 +21,7 @@ fun NavGraph(
     transactionViewModel: TransactionViewModel = hiltViewModel()
 ) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = Screen.AllTransactionScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.AccountDashboardScreen.route) {
         composable(route = Screen.AccountDashboardScreen.route) {
             AccountDashboard(
                 navController = navController
@@ -29,7 +29,7 @@ fun NavGraph(
         }
 
         composable(route = Screen.AccountAddingScreen.route) {
-            NewAccountScreen()
+            NewAccountScreen(accountViewModel = accountViewModel)
         }
 
         composable(route = Screen.AllTransactionScreen.route) {
