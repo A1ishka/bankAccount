@@ -8,5 +8,6 @@ data class AccountState(
     val name: String = "",
     val cardNumber: Long = 0,
     val accountNumber: Long = 0,
-    val isAccountVerified: Boolean = true
+    val isAccountVerified: Boolean = true,
+    val isLoading: Boolean = false
 )

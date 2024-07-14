@@ -2,6 +2,8 @@ package com.a1ishka.bankaccount.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import com.a1ishka.bankaccount.data.dao.AccountDao
+import com.a1ishka.bankaccount.data.dao.TransactionDao
 import com.a1ishka.bankaccount.data.entity.AccountEntity
 import com.a1ishka.bankaccount.data.entity.TransactionEntity
 

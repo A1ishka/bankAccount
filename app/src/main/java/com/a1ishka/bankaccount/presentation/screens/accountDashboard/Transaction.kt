@@ -17,12 +17,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a1ishka.bankaccount.R
-import com.a1ishka.bankaccount.data.Transaction
+import com.a1ishka.bankaccount.domain.Transaction
 
 
 @Composable
 fun TransactionItem(
     transaction: Transaction,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val textColor = when (transaction.status) {
@@ -60,7 +61,7 @@ fun TransactionItem(
         ) {
             Text(text = transaction.amount)
             IconButton(
-                onClick = { /*TODO*/ }
+                onClick = onClick
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_chevron_forward),

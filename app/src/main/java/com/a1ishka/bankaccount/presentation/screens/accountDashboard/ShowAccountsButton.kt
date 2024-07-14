@@ -13,18 +13,20 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.a1ishka.bankaccount.R
+import com.a1ishka.bankaccount.domain.Account
 import com.a1ishka.bankaccount.presentation.screens.accountDashboard.accountChoosingBottomSheet.BottomSheet
 
 
 @Composable
 fun ShowAccountsButton(
+    accountList : List<Account>,
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var showAccountBottomSheet by remember { mutableStateOf(false) }
 
     if (showAccountBottomSheet) {
-        BottomSheet(onNavigate = onNavigate) {
+        BottomSheet(accountList = accountList, onNavigate = onNavigate) {
             showAccountBottomSheet = false
         }
     }

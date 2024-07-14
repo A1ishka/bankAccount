@@ -2,20 +2,60 @@ package com.a1ishka.bankaccount.presentation.transaction
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.a1ishka.bankaccount.data.repository.TransactionRepositoryImpl
+import com.a1ishka.bankaccount.data.entity.TransactionEntity
 import com.a1ishka.bankaccount.domain.Transaction
+import com.a1ishka.bankaccount.domain.repository.TransactionRepository
+import com.a1ishka.bankaccount.util.Resource
 import com.a1ishka.bankaccount.util.toTransactionEntity
+import com.a1ishka.bankaccount.util.toTransactionList
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
+@HiltViewModel
 class TransactionViewModel @Inject constructor(
-    private val transactionRepositoryImpl: TransactionRepositoryImpl
+    private val transactionRepository: TransactionRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow(TransactionState())
-    val transactionState: MutableStateFlow<TransactionState> = _state
+    val transactionState: StateFlow<TransactionState> = _state
+
+    private var getTransactionsJob: Job? = null
+
+    init {
+        getTransactions()
+    }
+
+    fun getTransactions() {
+        getTransactionsJob?.cancel()
+        getTransactionsJob =
+            transactionRepository.getTransactions(accountId = _state.value.accountId)
+                .onEach { result ->
+                    when (result) {
+                        is Resource.Success<*> -> {
+                            if (result.data != null) {
+                                _state.value = transactionState.value.copy(
+                                    transactionList = (result.data as List<TransactionEntity>).toTransactionList(),
+                                    isLoading = false
+                                )
+                            }
+                        }
+
+                        is Resource.Error<*> -> {
+                            println(result.message)
+                        }
+
+                        is Resource.Loading<*> -> {
+                            _state.value = transactionState.value.copy(isLoading = true)
+                        }
+                    }
+                }.launchIn(viewModelScope)
+    }
 
     fun onTransactionEvent(event: TransactionEvent) {
         when (event) {
@@ -42,23 +82,28 @@ class TransactionViewModel @Inject constructor(
                     amount = amount
                 )
                 viewModelScope.launch {
-                    transactionRepositoryImpl.upsertTransaction(transaction.toTransactionEntity())
+                    transactionRepository.upsertTransaction(transaction.toTransactionEntity())
                 }
             }
 
             is TransactionEvent.DeleteTransaction -> {
                 viewModelScope.launch {
-                    transactionRepositoryImpl.deleteTransaction(event.transaction.toTransactionEntity())
+                    transactionRepository.deleteTransaction(event.transaction.toTransactionEntity())
                 }
             }
 
             is TransactionEvent.FilterTransactions -> {
-                viewModelScope.launch {
-                    transactionRepositoryImpl.getFilteredTransactions(
-                        event.accountId,
-                        event.startDate,
-                        event.endDate
-                    )
+                val accountId = event.accountId
+                val startDate = event.startDate
+                val endDate = event.endDate
+
+                if (startDate.isBlank() || endDate.isBlank()) {
+                    _state.update { it.copy(isDataVerified = false) }
+                    return
+                }
+
+                transactionRepository.getFilteredTransactions(accountId, startDate, endDate).onEach { filteredTransactions ->
+                    _state.update { it.copy(transactionList = filteredTransactions.toTransactionList()) }
                 }
             }
 
@@ -84,6 +129,13 @@ class TransactionViewModel @Inject constructor(
 
             is TransactionEvent.SetAccount -> {
                 _state.update { it.copy(accountId = event.accountId) }
+            }
+
+            is TransactionEvent.SetEndDate -> {
+                _state.update { it.copy(startDate = event.date) }
+            }
+            is TransactionEvent.SetStartDate -> {
+                _state.update { it.copy(endDate = event.date) }
             }
         }
     }

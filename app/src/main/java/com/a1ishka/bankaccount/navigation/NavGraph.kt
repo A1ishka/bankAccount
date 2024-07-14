@@ -12,23 +12,34 @@ import com.a1ishka.bankaccount.presentation.screens.accountDashboard.AccountDash
 import com.a1ishka.bankaccount.presentation.screens.allTransactions.AllTransaction
 import com.a1ishka.bankaccount.presentation.screens.newAccountScreen.NewAccountScreen
 import com.a1ishka.bankaccount.presentation.screens.newTransaction.NewTransactionScreen
+import com.a1ishka.bankaccount.presentation.screens.transactionDetails.TransactionDetailsScreen
 import com.a1ishka.bankaccount.presentation.transaction.TransactionViewModel
 import com.a1ishka.bankaccount.util.Constants.ARGUMENT_ID
 
 @Composable
-fun NavGraph() {
+fun NavGraph(
+    accountViewModel: AccountViewModel = hiltViewModel(),
+    transactionViewModel: TransactionViewModel = hiltViewModel()
+) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.AccountDashboardScreen.route) {
         composable(route = Screen.AccountDashboardScreen.route) {
-            AccountDashboard(navController = navController)
+            AccountDashboard(
+                navController = navController,
+                accountViewModel = accountViewModel,
+                transactionViewModel = transactionViewModel
+            )
         }
 
         composable(route = Screen.AccountAddingScreen.route) {
-            NewAccountScreen()
+            NewAccountScreen(accountViewModel = accountViewModel)
         }
 
         composable(route = Screen.AllTransactionScreen.route) {
-            AllTransaction(navController = navController)
+            AllTransaction(
+                navController = navController,
+                transactionViewModel = transactionViewModel
+            )
         }
 
         composable(
@@ -38,10 +49,12 @@ fun NavGraph() {
                     type = NavType.LongType
                 }
             )
-        ) { }
+        ) { entry ->
+            TransactionDetailsScreen(transactionId = entry.arguments!!.getLong("id"), transactionViewModel = transactionViewModel)
+        }
 
         composable(route = Screen.TransactionAddingScreen.route) {
-            NewTransactionScreen()
+            NewTransactionScreen(transactionViewModel = transactionViewModel)
         }
     }
 }

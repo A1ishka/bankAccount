@@ -1,6 +1,6 @@
 package com.a1ishka.bankaccount.data.repository
 
-import com.a1ishka.bankaccount.data.TransactionDao
+import com.a1ishka.bankaccount.data.dao.TransactionDao
 import com.a1ishka.bankaccount.data.entity.TransactionEntity
 import com.a1ishka.bankaccount.domain.repository.TransactionRepository
 import kotlinx.coroutines.Dispatchers
@@ -13,7 +13,7 @@ class TransactionRepositoryImpl(private val transactionDao: TransactionDao) :
     override fun getTransactions(accountId: Long): Flow<List<TransactionEntity>> =
         transactionDao.getTransactions(accountId)
 
-    override fun getTransaction(transactionId: Long): TransactionEntity =
+    override fun getTransaction(transactionId: Long): Flow<TransactionEntity> =
         transactionDao.getTransaction(transactionId)
 
     override fun getFilteredTransactions(

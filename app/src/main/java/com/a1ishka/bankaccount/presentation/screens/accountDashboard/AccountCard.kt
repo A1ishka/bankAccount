@@ -15,14 +15,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.a1ishka.bankaccount.R
-import com.a1ishka.bankaccount.data.Account
+import com.a1ishka.bankaccount.domain.Account
 
 
 @Composable
 fun AccountCard(
     account: Account,
+    accountList: List<Account>,
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -46,7 +46,7 @@ fun AccountCard(
             AccountData(account = account)
             //do i need to associate it together or image is a constant
 
-            ShowAccountsButton(onNavigate = onNavigate)
+            ShowAccountsButton(onNavigate = onNavigate, accountList = accountList)
         }
     }
 }

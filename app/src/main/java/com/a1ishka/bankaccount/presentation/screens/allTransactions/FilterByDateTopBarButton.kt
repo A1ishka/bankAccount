@@ -12,13 +12,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.a1ishka.bankaccount.R
 import com.a1ishka.bankaccount.presentation.screens.allTransactions.filterByDateBottomSheet.FilterByDateBottomSheet
+import com.a1ishka.bankaccount.presentation.transaction.TransactionEvent
 
 @Composable
-fun FilterByDateButton() {
+fun FilterByDateButton(
+    currentAccount: Long,
+    validated: Boolean,
+    onClick: (TransactionEvent) -> Unit
+) {
     var showFilterBottomSheet by remember { mutableStateOf(false) }
 
     if (showFilterBottomSheet) {
-        FilterByDateBottomSheet() {
+        FilterByDateBottomSheet(
+            currentAccount = currentAccount,
+            validated = validated,
+            onClick = onClick
+        ) {
             showFilterBottomSheet = false
         }
     }

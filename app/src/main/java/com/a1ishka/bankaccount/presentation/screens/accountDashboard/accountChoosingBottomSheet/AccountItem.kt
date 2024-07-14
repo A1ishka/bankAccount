@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.a1ishka.bankaccount.R
-import com.a1ishka.bankaccount.data.Account
+import com.a1ishka.bankaccount.domain.Account
 import com.a1ishka.bankaccount.presentation.screens.accountDashboard.AccountData
 
 

@@ -9,7 +9,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -22,7 +21,8 @@ import androidx.compose.ui.unit.sp
 @Composable
 fun InputWithTitle(
     @StringRes titleId: Int,
-    onTextChanged: (currentInput:String) -> Unit,
+    value: String,
+    onTextChanged: (currentInput: String) -> Unit,
     keyboardType: KeyboardType,
     validated: Boolean
 ) {
@@ -40,7 +40,7 @@ fun InputWithTitle(
         modifier = Modifier
             .fillMaxWidth()
             .padding(top = 10.dp, bottom = 20.dp),
-        value = onTextChanged.toString(),
+        value = value,
         onValueChange = onTextChanged,
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         textStyle = TextStyle(fontSize = 17.sp),

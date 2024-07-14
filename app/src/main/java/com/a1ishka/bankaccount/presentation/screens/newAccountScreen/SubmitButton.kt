@@ -12,27 +12,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a1ishka.bankaccount.R
+import com.a1ishka.bankaccount.presentation.account.AccountEvent
 
 
 @Composable
 fun SubmitButton(
-    accountName: String,
-    accountNumber: String,
-    accountCardNumber: String,
-    onValidate: (validated: Boolean) -> Unit,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit
 ) {
     Button(
         modifier = Modifier.fillMaxWidth(),
-        onClick = {
-            if (validate(accountName, accountNumber, accountCardNumber)) {
-                onValidate(true)
-                onClick
-            } else {
-                onValidate(false)
-            }
-            //be replaced to VM
-        },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(64, 156, 255, 255),
             contentColor = Color.White
@@ -44,11 +33,4 @@ fun SubmitButton(
             fontSize = 20.sp
         )
     }
-}
-
-fun validate(accountName: String, accountNumber: String, accountCardNumber: String): Boolean {
-    if (accountName.isEmpty() || accountNumber.isEmpty() || accountCardNumber.isEmpty()) {
-        return false
-    }
-    return true
 }

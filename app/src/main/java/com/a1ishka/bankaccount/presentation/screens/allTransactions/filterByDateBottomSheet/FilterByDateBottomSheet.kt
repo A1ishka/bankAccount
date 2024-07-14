@@ -22,6 +22,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
@@ -42,12 +43,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.a1ishka.bankaccount.R
+import com.a1ishka.bankaccount.presentation.transaction.TransactionEvent
 import java.time.LocalDate.*
 import java.util.Date
 import java.util.Locale
 
 @Composable
-fun FilterByDateBottomSheet(onDismiss: () -> Unit) {
+fun FilterByDateBottomSheet(
+    currentAccount: Long,
+    validated: Boolean,
+    onClick: (TransactionEvent) -> Unit,
+    onDismiss: () -> Unit
+) {
+    val borderColor = if (validated) {
+        Color.Gray
+    } else {
+        Color.Red
+    }
+
     val filterBottomSheetState = rememberModalBottomSheetState()
 
     val startDate = remember { mutableStateOf("") }
@@ -122,6 +135,11 @@ fun FilterByDateBottomSheet(onDismiss: () -> Unit) {
                         }
                     )
                 },
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedBorderColor = borderColor,
+                    focusedBorderColor = borderColor,
+                    focusedLabelColor = borderColor
+                ),
                 textStyle = TextStyle(fontSize = 17.sp),
                 shape = RoundedCornerShape(10.dp)
             )
@@ -154,12 +172,24 @@ fun FilterByDateBottomSheet(onDismiss: () -> Unit) {
                         }
                     )
                 },
+                colors = OutlinedTextFieldDefaults.colors(
+                    unfocusedBorderColor = borderColor,
+                    focusedBorderColor = borderColor,
+                    focusedLabelColor = borderColor
+                ),
                 textStyle = TextStyle(fontSize = 17.sp),
                 shape = RoundedCornerShape(10.dp)
             )
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
+                    onClick(
+                        TransactionEvent.FilterTransactions(
+                            accountId = currentAccount,
+                            startDate = startDate.value,
+                            endDate = endDate.value
+                        )
+                    )
                 },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(64, 156, 255, 255),
